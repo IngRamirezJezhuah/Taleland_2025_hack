@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, FlatList, Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, Image, ScrollView, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const categories = [
     { id: "1", title: "Hamburgesa", imageUrl: "https://i.pinimg.com/736x/3c/21/c2/3c21c27d83f5780aadc396ab4e2bd836.jpg" },
@@ -16,7 +17,7 @@ const carouselImages = [
 ];
 
 const imagen = [
-    "https://i.pinimg.com/736x/36/55/81/3655816eba02dc176bcc098b8690e652.jpg"
+   
 ]
 
 const Home = () => {
@@ -38,32 +39,45 @@ const Home = () => {
         }
     };
 
+    
+    
+
     return (
         <ScrollView style={styles.container}>
-        <View style={styles.welcomeContainer}>
-            <View style={{alignItems: 'baseline',paddingHorizontal: 100,}}>
-                <Image style={{alignItems: 'baseline',paddingHorizontal: 100,}} source={{ uri: "https://i.pinimg.com/736x/b5/e4/ba/b5e4ba0fa2f28394dc3bfb352a55f7b4.jpg" }} />  
+            <View>
+                <Ionicons name="person-outline" size={29} color={'#62bec0'}/>
             </View>
+            <View style={styles.busqueda}>
+                <Ionicons name="search-outline" size={29} />
+                <TextInput 
+                placeholder="Buscar tu comida favorita ..."/>
+            </View>
+        <View style={styles.welcomeContainer}>
             <Text style={styles.welcomeText}>Haz tu Pedido ⸜(｡˃ ᵕ ˂ )⸝♡!</Text>
             <Text style={styles.welcomeSubText}>ordena aqui facil y rapido sin necesidad de hacer fila ദ്ദി •⩊• ) </Text>
-            
         </View>
         
+        <Image source={{ uri: "https://i.pinimg.com/736x/36/55/81/3655816eba02dc176bcc098b8690e652.jpg" }} style={styles.carouselImage} />
+
+        <Image source={{ uri: "https://i.pinimg.com/736x/36/55/81/3655816eba02dc176bcc098b8690e652.jpg" }} style={styles.carouselImage} />
         <Text style={styles.sectionTitle}>Explora nuestras Categorías</Text>
-        <Text>Ver Todo ^</Text>
-        <FlatList
-            data={categories}
-            renderItem={({ item }) => (
-            <View style={styles.categoryItem}>
-                <Image source={{ uri: item.imageUrl }} style={styles.categoryImage} />
-                <Text style={styles.categoryTitle}>{item.title}</Text>
-            </View>
-            )}
-            keyExtractor={(item) => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.categoriesContainer}
-        />
+        <View>
+            <FlatList
+                data={categories}
+                renderItem={({ item }) => (
+                <View style={styles.categoryItem}>
+                    <TouchableOpacity>
+                        <Image source={{ uri: item.imageUrl }} style={styles.categoryImage} />
+                        <Text style={styles.categoryTitle}>{item.title}</Text>
+                    </TouchableOpacity>
+                </View>
+                )}
+                keyExtractor={(item) => item.id}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.categoriesContainer}
+            />
+        </View>
 
         <Text style={styles.sectionTitle}>Promos</Text>
         <View style={styles.carouselContainer}>
@@ -86,6 +100,13 @@ const styles = StyleSheet.create({
         backgroundColor: "#F5F5F5",
         paddingHorizontal: 20,
         paddingTop: 10,
+    },
+    busqueda:{
+        padding: 20,
+        margin: 10,
+        justifyContent: 'center',
+        fontSize: 10,
+
     },
     categoryItem: {
         alignItems: "center",
